@@ -206,7 +206,11 @@ cat(&quot;Mean Number of Steps / Day   : &quot;, meanSteps2, &quot;\n&quot;)</co
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 <p>Plot time-series data for weekdays and weekends.</p>
-<pre class="r"><code>weekendData &lt;- subset(dt, wday(date) %in% c(1, 7))
+<pre class="r"><code># btw, I am not following instructions to the letter here - Roger says to use
+# a factor variable to mark weekdays and weekends, instead I construct
+# separate tables by subsetting. 
+# Uses more space than necessary, but ok for this dataset.
+weekendData &lt;- subset(dt, wday(date) %in% c(1, 7))
 weekdayData &lt;- subset(dt, !(wday(date) %in% c(1, 7)))
 p1 &lt;- qplot(weekdayData$interval, weekdayData$steps, geom = &quot;line&quot;,
      main = &quot;N(steps) / interval - Weekdays&quot;,

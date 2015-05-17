@@ -223,6 +223,10 @@ Plot time-series data for weekdays and weekends.
 
 
 ```r
+# btw, I am not following instructions to the letter here - Roger says to use
+# a factor variable to mark weekdays and weekends, instead I construct
+# separate tables by subsetting. 
+# Uses more space than necessary, but ok for this dataset.
 weekendData <- subset(dt, wday(date) %in% c(1, 7))
 weekdayData <- subset(dt, !(wday(date) %in% c(1, 7)))
 p1 <- qplot(weekdayData$interval, weekdayData$steps, geom = "line",
