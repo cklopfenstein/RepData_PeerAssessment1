@@ -77,7 +77,7 @@ qplot(sumsNA$steps, geom="histogram",
       binwidth = 1000)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+![](PA1_template_files/figure-html/stepsPerDay-1.png) 
 
 ```r
 # also want mean and median - need to tell it to ignore NAs
@@ -98,10 +98,6 @@ cat("Median Number of Steps / Day : ", medianSteps, "\n")
 ## Median Number of Steps / Day :  10765
 ```
 
-```r
-# mean 10766.189, median 10765
-```
-
 ## What is the average daily activity pattern?
 Show a time series plot of number of steps as a function of daily interval index, averaged over all days. Also report which interval has the maximum average number of steps.
 
@@ -120,7 +116,7 @@ qplot(x = interval, y = steps, geom = "line",
      binwidth = 1)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/activityPattern-1.png) 
 
 ```r
 # find the max interval
@@ -133,11 +129,11 @@ cat("Maximum average number of steps occurs during interval", maxInterval, "\n")
 ```
 
 ```r
-cat("At time", maxInterval %/% 12, ":", (maxInterval %% 12) * 5, "\n")
+cat("At time", (maxInterval - 1) %/% 12, ":", ((maxInterval - 1) %% 12) * 5, "\n")
 ```
 
 ```
-## At time 8 : 40
+## At time 8 : 35
 ```
 
 ## Imputing missing values
@@ -190,11 +186,10 @@ qplot(sums$steps, geom="histogram",
       binwidth = 1000)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+![](PA1_template_files/figure-html/replaceNA-1.png) 
 
 ```r
 # note that most likely value of steps/day is enhanced after replacing NA
-# makes sense, I guess
 # also want mean and median
 meanSteps2 <- mean(sums$steps, na.rm=TRUE)
 medianSteps2 <- median(sums$steps, na.rm=TRUE)
@@ -214,8 +209,8 @@ cat("Median Number of Steps / Day : ", medianSteps2, "\n")
 ```
 
 ```r
-# median is = mean? and non-integral?  ah, because steps now replaced by float for NA
-# non-integral ok, but suspicious that median=mean
+# suspicious that median=mean? maybe due to how I replaced NA with
+# most frequent (non-integral) value.
 # note this in write-up
 ```
 
@@ -252,6 +247,6 @@ library(gridExtra)  # must have gridExtra lib installed
 grid.arrange(p1, p2, ncol = 1)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![](PA1_template_files/figure-html/weekday-1.png) 
 
 Activity patterns appear to be different between Weekdays and Weekends (by inspection).
